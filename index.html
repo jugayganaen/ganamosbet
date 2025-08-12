@@ -195,6 +195,29 @@
       font-size: 14px;
     }
 
+    /* Pop-up de ganadores */
+    .popup-ganador {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 12px 18px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 14px;
+      display: none;
+      z-index: 9999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      animation: fadeInOut 5s ease-in-out;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(20px); }
+      10% { opacity: 1; transform: translateY(0); }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(20px); }
+    }
+
     @media (max-width: 600px) {
       .whatsapp-button {
         font-size: 16px;
@@ -250,6 +273,9 @@
     🎁 BONO ACTIVO - ¡Solicítalo ahora por WhatsApp!
   </div>
 
+  <!-- Pop-up Ganador -->
+  <div class="popup-ganador" id="popupGanador"></div>
+
   <script>
     const whatsappBtn = document.querySelector('.whatsapp-button');
     if(whatsappBtn) {
@@ -260,6 +286,31 @@
         this.style.transform = 'scale(1)';
       });
     }
+
+    // Lista de ganadores ficticios de Argentina
+    const ganadores = [
+      "Mariana López de Rosario ganó $15.000 y retiró sus ganancias 🎉",
+      "Carlos Gómez de Córdoba está jugando ahora mismo 🃏",
+      "Sofía Fernández de Mendoza ganó $8.500 hace 2 minutos 💰",
+      "Juan Pérez de Buenos Aires retiró $22.000 hoy 💵",
+      "Lucía Martínez de Mar del Plata está apostando en Ruleta 🎯",
+      "Federico Díaz de Salta ganó $12.000 y sigue jugando ♠️",
+      "Camila Torres de La Plata retiró $9.000 hace instantes 🤑"
+    ];
+
+    function mostrarPopupGanador() {
+      const popup = document.getElementById("popupGanador");
+      const ganador = ganadores[Math.floor(Math.random() * ganadores.length)];
+      popup.textContent = ganador;
+      popup.style.display = "block";
+      
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 5000);
+    }
+
+    // Mostrar pop-up cada cierto tiempo
+    setInterval(mostrarPopupGanador, 8000);
   </script>
 </body>
 </html>
